@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fumati Engineers PVT LTD – Turning Steel Into Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #152840;
+    --navy-dark: #070f1a;
+    --gold: #f0a500;
+    --gold-light: #f5b930;
+    --white: #ffffff;
+    --text-body: #c8d4e0;
+    --text-muted: #8fa0b4;
+    --accent-blue: #1e5a96;
+  }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: 'Barlow', sans-serif; 
+    background: var(--navy); 
+    color: var(--white); 
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ANIMATED BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(30,90,150,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(240,165,0,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    background: rgba(13,27,46,0.98);
+    border-bottom: 1px solid rgba(240,165,0,0.2);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem; font-weight: 800; letter-spacing: 2px;
+    color: var(--white); text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  .nav-logo:hover { transform: scale(1.05); }
+  .nav-logo span { color: var(--gold); }
+  .logo-icon {
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-icon img {
+    width: 100%; height: 100%; object-fit: contain;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { 
+    color: var(--text-body); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    font-weight: 500; 
+    transition: all 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    padding: 9px 22px; border-radius: 6px;
+    font-weight: 700; font-size: 0.85rem; text-decoration: none;
+    transition: all 0.3s; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(240,165,0,0.3);
+    border: none;
+    cursor: pointer;
+  }
+  .nav-cta:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(240,165,0,0.4);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px; overflow: hidden; position: relative;
+  }
+  .hero-left {
+    display: flex; align-items: center;
+    padding: 60px 5% 60px 5%;
+    background: linear-gradient(135deg, #070f1a 0%, #0d1b2e 40%, #152840 100%);
+    position: relative; z-index: 2;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(30,90,150,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; top: 0; right: -40px; bottom: 0; width: 80px;
+    background: linear-gradient(135deg, #070f1a 0%, #0d1b2e 60%, #152840 100%);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    z-index: 3;
+  }
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: brightness(0.7);
+    transition: filter 0.4s ease;
+  }
+  .hero-right:hover img { filter: brightness(0.8); }
+  .hero-right-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(7,15,26,0.85) 0%, rgba(7,15,26,0.2) 60%);
+  }
+  .hero-right-badge {
+    position: absolute; bottom: 40px; right: 40px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    padding: 20px 24px; border-radius: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-align: center; z-index: 4;
+    box-shadow: 0 12px 32px rgba(240,165,0,0.5);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero-right-badge .big { font-size: 2.4rem; font-weight: 800; line-height: 1; }
+  .hero-right-badge .small { font-size: 0.75rem; font-weight: 600; }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(240,165,0,0.15); 
+    border: 1px solid rgba(240,165,0,0.35);
+    color: var(--gold); font-size: 0.78rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 8px 16px; border-radius: 6px; margin-bottom: 22px;
+    transition: all 0.3s;
+  }
+  .hero-eyebrow:hover {
+    background: rgba(240,165,0,0.25);
+    transform: translateX(4px);
+  }
+  .hero-eyebrow::before { 
+    display: none;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800;
+    line-height: 1.0; letter-spacing: -1px; color: var(--white); margin-bottom: 8px;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); display: block; }
+  .hero-sub { font-size: 1rem; color: var(--text-body); line-height: 1.7; margin: 20px 0 36px; max-width: 440px; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    padding: 14px 32px; border-radius: 6px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+    border: none; cursor: pointer;
+    box-shadow: 0 8px 20px rgba(240,165,0,0.3);
+  }
+  .btn-primary:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(240,165,0,0.4);
+  }
+  .btn-primary:active { transform: translateY(-1px); }
+  .btn-secondary {
+    color: var(--white); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 0.95rem; padding: 14px 0;
+    transition: all 0.3s;
+  }
+  .btn-secondary .call-icon {
+    width: 44px; height: 44px; border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1.1rem; transition: all 0.3s;
+  }
+  .btn-secondary:hover .call-icon { 
+    background: var(--gold); 
+    color: var(--navy);
+    transform: rotate(15deg) scale(1.1);
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat-num { 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: 2.6rem; font-weight: 800; 
+    color: var(--gold); 
+    line-height: 1;
+    text-shadow: 0 4px 12px rgba(240,165,0,0.3);
+  }
+  .hero-stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* FEATURE STRIP */
+  .features {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    background: linear-gradient(135deg, var(--navy-mid) 0%, #1a3050 100%);
+    border-top: 3px solid var(--gold);
+  }
+  .feature-card {
+    padding: 0; border-right: 1px solid rgba(255,255,255,0.07);
+    transition: all 0.3s ease; overflow: hidden; position: relative;
+    cursor: pointer;
+  }
+  .feature-card:last-child { border-right: none; }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-card:hover { background: rgba(30,90,150,0.1); }
+  .feature-img {
+    width: 100%; height: 160px; object-fit: cover; display: block;
+    filter: brightness(0.5) saturate(0.6);
+    transition: filter 0.4s;
+  }
+  .feature-card:hover .feature-img { filter: brightness(0.7) saturate(0.85); }
+  .feature-body { padding: 24px 24px 28px; position: relative; z-index: 1; }
+  .feature-icon {
+    width: 48px; height: 48px; margin-bottom: 14px;
+    background: linear-gradient(135deg, rgba(240,165,0,0.15) 0%, rgba(240,165,0,0.08) 100%);
+    border-radius: 8px;
+    border: 1px solid rgba(240,165,0,0.2);
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 1.4rem;
+    transition: all 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    background: rgba(240,165,0,0.25);
+    transform: scale(1.1);
+  }
+  .feature-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 700; color: var(--gold);
+    margin-bottom: 8px;
+    transition: all 0.3s;
+  }
+  .feature-card:hover h3 { color: var(--gold-light); }
+  .feature-card p { font-size: 0.85rem; color: var(--text-body); line-height: 1.6; }
+
+  /* SHARED */
+  section { padding: 90px 5%; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--gold); font-size: 0.78rem; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .section-label::before { 
+    content:''; 
+    display:inline-block; 
+    width:28px; 
+    height:2px; 
+    background:linear-gradient(90deg, var(--gold), transparent);
+    animation: slideRight 0.6s ease;
+  }
+  @keyframes slideRight {
+    from { width: 0; }
+    to { width: 28px; }
+  }
+  h2.section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem,4vw,3rem); font-weight: 800;
+    line-height: 1.1; color: var(--white); margin-bottom: 20px;
+  }
+  h2.section-title em { font-style: normal; color: var(--gold); }
+
+  /* ABOUT */
+  .about { background: var(--navy); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-images { position: relative; height: 560px; }
+  .about-img-main {
+    position: absolute; top: 0; left: 0; right: 60px; bottom: 60px;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+  }
+  .about-img-main:hover { transform: translateY(-8px); }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-img-accent {
+    position: absolute; bottom: 0; right: 0; width: 56%; height: 52%;
+    border-radius: 10px; overflow: hidden;
+    border: 4px solid var(--navy); z-index: 2;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+  }
+  .about-img-accent:hover { transform: translateY(-4px); }
+  .about-img-accent img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-badge {
+    position: absolute; bottom: 68px; left: -16px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    padding: 16px 20px; border-radius: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.8rem; font-weight: 800; line-height: 1;
+    text-align: center; z-index: 3;
+    box-shadow: 0 12px 40px rgba(240,165,0,0.5);
+  }
+  .about-badge small { display: block; font-size: 0.7rem; font-weight: 600; }
+  .about-text p { color: var(--text-body); line-height: 1.8; margin-bottom: 20px; font-size: 1rem; }
+  .about-pillars { display: flex; flex-direction: column; gap: 18px; margin: 28px 0; }
+  .pillar {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(30,90,150,0.05) 100%);
+    border-left: 3px solid var(--gold);
+    padding: 16px 18px; border-radius: 0 6px 6px 0;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .pillar:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(30,90,150,0.08) 100%);
+    transform: translateX(6px);
+  }
+  .pillar-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; transition: transform 0.3s; }
+  .pillar:hover .pillar-icon { transform: scale(1.2); }
+  .pillar h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .pillar p { font-size: 0.87rem; color: var(--text-body); line-height: 1.6; }
+
+  /* SERVICES */
+  .services { background: linear-gradient(135deg, var(--navy-mid) 0%, #1a3050 100%); }
+  .services-header { max-width: 560px; margin-bottom: 48px; }
+  .services-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+  .service-card {
+    background: linear-gradient(135deg, var(--navy) 0%, rgba(30,90,150,0.1) 100%);
+    border: 1px solid rgba(240,165,0,0.15);
+    border-radius: 10px; overflow: hidden; transition: all 0.4s;
+    cursor: pointer;
+  }
+  .service-card:hover { 
+    border-color: rgba(240,165,0,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(240,165,0,0.2);
+  }
+  .service-img { 
+    width: 100%; height: 200px; object-fit: cover; display: block; 
+    filter: brightness(0.75); transition: filter 0.4s;
+  }
+  .service-card:hover .service-img { filter: brightness(0.95); }
+  .service-body { padding: 28px 28px 32px; position: relative; }
+  .service-body::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
+  .service-card:hover .service-body::before { transform: scaleX(1); }
+  .service-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.6rem; font-weight: 800; color: rgba(240,165,0,0.15); line-height: 1; margin-bottom: 6px; }
+  .service-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .service-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+  .service-card p { font-size: 0.9rem; color: var(--text-body); line-height: 1.7; }
+
+  /* PROJECTS */
+  .projects { background: var(--navy); }
+  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 20px; }
+  .projects-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+  .project-card { 
+    border-radius: 10px; 
+    overflow: hidden; 
+    position: relative; 
+    aspect-ratio: 3/4; 
+    background: var(--navy-mid);
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  .project-card:hover { transform: translateY(-8px); }
+  .project-card img { 
+    width: 100%; height: 100%; 
+    object-fit: cover; 
+    transition: transform 0.4s; 
+    display: block;
+  }
+  .project-card:hover img { transform: scale(1.08); }
+  .project-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,46,0.98) 0%, transparent 55%);
+    display: flex; flex-direction: column; justify-content: flex-end; 
+    padding: 22px 18px;
+    transition: all 0.3s;
+  }
+  .project-card:hover .project-overlay {
+    background: linear-gradient(to top, rgba(13,27,46,0.95) 0%, rgba(30,90,150,0.2) 40%, transparent 55%);
+  }
+  .project-cat { font-size: 0.7rem; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .project-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--white); line-height: 1.2; }
+  .project-loc { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+  /* MISSION */
+  .mission { 
+    background: linear-gradient(135deg, var(--navy-mid) 0%, #1a3050 100%); 
+    position: relative; 
+    overflow: hidden;
+  }
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .mission-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 80px; 
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .mv-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+  .mv-card { 
+    background: linear-gradient(135deg, var(--navy) 0%, rgba(30,90,150,0.1) 100%);
+    border: 1px solid rgba(240,165,0,0.2); 
+    border-top: 3px solid var(--gold); 
+    padding: 26px 22px; 
+    border-radius: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .mv-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(240,165,0,0.4);
+    box-shadow: 0 12px 32px rgba(240,165,0,0.15);
+  }
+  .mv-card h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .mv-card p { font-size: 0.87rem; color: var(--text-body); line-height: 1.6; }
+  .values-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .val-tag { 
+    background: linear-gradient(135deg, rgba(240,165,0,0.15) 0%, rgba(240,165,0,0.08) 100%);
+    border: 1px solid rgba(240,165,0,0.3); 
+    color: var(--gold); 
+    padding: 8px 18px; 
+    border-radius: 20px; 
+    font-size: 0.82rem; 
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .val-tag:hover {
+    background: rgba(240,165,0,0.25);
+    transform: translateY(-2px);
+  }
+  .mission-images { display: grid; grid-template-rows: 1fr 1fr; gap: 16px; height: 500px; }
+  .mission-img-top, .mission-img-bottom { border-radius: 10px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  .mission-img-top img, .mission-img-bottom img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .mission-img-top:hover img, .mission-img-bottom:hover img { transform: scale(1.05); }
+  .mission-img-top { height: 62%; }
+  .mission-img-bottom { height: 36%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .mission-img-bottom img { border-radius: 8px; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: linear-gradient(135deg, var(--navy) 0%, rgba(30,90,150,0.05) 100%); }
+  .test-header { text-align: center; margin-bottom: 52px; }
+  .test-header .section-label { justify-content: center; }
+  .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .test-card {
+    background: linear-gradient(135deg, var(--navy-mid) 0%, rgba(30,90,150,0.1) 100%);
+    border: 1px solid rgba(240,165,0,0.15);
+    border-radius: 10px; padding: 32px 28px; position: relative;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+  .test-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(240,165,0,0.3);
+    box-shadow: 0 12px 40px rgba(240,165,0,0.15);
+  }
+  .test-card::before {
+    content: '"'; 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: 6rem;
+    color: var(--gold); 
+    opacity: 0.1; 
+    position: absolute; 
+    top: 8px; 
+    left: 22px; 
+    line-height: 1;
+  }
+  .test-logo-img { height: 40px; object-fit: contain; margin-bottom: 20px; filter: grayscale(1) brightness(1.5); }
+  .test-quote { font-size: 0.92rem; color: var(--text-body); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+  .test-author { display: flex; align-items: center; gap: 12px; }
+  .test-author-img { 
+    width: 44px; height: 44px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid var(--gold);
+    transition: transform 0.3s;
+  }
+  .test-card:hover .test-author-img { transform: scale(1.1); }
+  .test-author-name { font-weight: 700; font-size: 0.88rem; color: var(--white); }
+  .test-author-role { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* CLIENTS */
+  .clients { background: linear-gradient(135deg, var(--navy-mid) 0%, #1a3050 100%); }
+  .clients-header { text-align: center; margin-bottom: 52px; }
+  .clients-header .section-label { justify-content: center; }
+  .clients-banner { 
+    width: 100%; 
+    height: 220px; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    position: relative; 
+    margin-bottom: 40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .clients-banner img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.35); }
+  .clients-banner-text {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: clamp(1.4rem,3vw,2.2rem);
+    font-weight: 800; color: var(--white); text-align: center; padding: 20px;
+  }
+  .clients-banner-text em { color: var(--gold); font-style: normal; }
+  .clients-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4,1fr); 
+    gap: 1px; 
+    background: rgba(255,255,255,0.06); 
+    border: 1px solid rgba(240,165,0,0.15);
+    border-radius: 10px; 
+    overflow: hidden;
+  }
+  .client-cell { 
+    background: linear-gradient(135deg, var(--navy-mid) 0%, rgba(30,90,150,0.05) 100%);
+    padding: 32px 20px; 
+    display: flex; flex-direction: column; align-items: center; 
+    justify-content: center; text-align: center; gap: 10px; 
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .client-cell:hover { 
+    background: rgba(240,165,0,0.1);
+    transform: scale(1.05);
+  }
+  .client-emoji { font-size: 1.8rem; transition: transform 0.3s; }
+  .client-cell:hover .client-emoji { transform: scale(1.2); }
+  .client-logo-text { 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: 1.05rem; font-weight: 700; 
+    color: var(--text-muted); 
+    letter-spacing: 1px; 
+    text-transform: uppercase; 
+    transition: color 0.3s;
+  }
+  .client-cell:hover .client-logo-text { color: var(--gold); }
+
+  /* WHY US */
+  .why { background: var(--navy); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-images { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 280px 200px; gap: 14px; }
+  .why-img-a { grid-column: 1 / 3; border-radius: 10px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  .why-img-b, .why-img-c { border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .why-images img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .why-img-a:hover img, .why-img-b:hover img, .why-img-c:hover img { transform: scale(1.05); }
+  .why-text p { color: var(--text-body); line-height: 1.8; font-size: 1rem; margin-bottom: 32px; }
+  .why-points { display: flex; flex-direction: column; gap: 14px; }
+  .why-point { display: flex; gap: 14px; align-items: flex-start; transition: all 0.3s; }
+  .why-point:hover { transform: translateX(6px); }
+  .why-check { 
+    width: 28px; height: 28px; 
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    flex-shrink: 0; 
+    color: var(--navy); 
+    font-size: 0.85rem; 
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(240,165,0,0.3);
+  }
+  .why-point p { font-size: 0.92rem; color: var(--text-body); line-height: 1.5; padding-top: 4px; }
+
+  /* TEAM */
+  .team { background: linear-gradient(135deg, var(--navy-mid) 0%, #1a3050 100%); }
+  .team-header { text-align: center; margin-bottom: 52px; }
+  .team-header .section-label { justify-content: center; }
+  .team-img-wide { 
+    width: 100%; 
+    height: 360px; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    position: relative;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    cursor: pointer;
+  }
+  .team-img-wide img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.6); transition: all 0.4s; }
+  .team-img-wide:hover img { filter: brightness(0.75); transform: scale(1.02); }
+  .team-img-wide-overlay {
+    position: absolute; inset: 0; 
+    display: flex; align-items: center; justify-content: center; 
+    flex-direction: column; gap: 16px; text-align: center; padding: 32px;
+  }
+  .team-img-wide-overlay h3 { 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: clamp(1.6rem,3vw,2.4rem); 
+    font-weight: 800; 
+    color: var(--white);
+  }
+  .team-img-wide-overlay p { color: var(--text-body); max-width: 560px; font-size: 1rem; line-height: 1.7; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    position: relative; 
+    overflow: hidden;
+    padding: 80px 5%;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 40px; 
+    flex-wrap: wrap;
+  }
+  .cta-banner-bg {
+    position: absolute; 
+    inset: 0; 
+    z-index: 0;
+  }
+  .cta-banner-bg img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.25) saturate(0.5); }
+  .cta-banner-bg::after { 
+    content: ''; 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(135deg, rgba(240,165,0,0.12) 0%, rgba(30,90,150,0.08) 100%);
+  }
+  .cta-content { position: relative; z-index: 2; }
+  .cta-banner h2 { 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: clamp(1.8rem,4vw,2.8rem); 
+    font-weight: 800; 
+    color: var(--white); 
+    line-height: 1.1;
+  }
+  .cta-banner h2 span { display: block; font-size: 0.65em; font-weight: 500; color: var(--text-body); margin-top: 8px; }
+  .cta-actions { position: relative; z-index: 2; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-gold { 
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy); 
+    padding: 14px 34px; 
+    border-radius: 6px; 
+    font-weight: 700; 
+    font-size: 0.95rem; 
+    text-decoration: none; 
+    transition: all 0.3s; 
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(240,165,0,0.3);
+  }
+  .btn-gold:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(240,165,0,0.4);
+  }
+  .btn-outline { 
+    border: 2px solid rgba(255,255,255,0.4); 
+    color: var(--white); 
+    padding: 12px 28px; 
+    border-radius: 6px; 
+    font-weight: 600; 
+    font-size: 0.95rem; 
+    text-decoration: none; 
+    transition: all 0.3s; 
+    white-space: nowrap;
+    background: transparent;
+    cursor: pointer;
+  }
+  .btn-outline:hover { 
+    border-color: var(--gold); 
+    color: var(--gold);
+    background: rgba(240,165,0,0.1);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #070f1a; 
+    padding: 60px 5% 28px;
+    position: relative; 
+    overflow: hidden;
+  }
+  .footer-bg { position: absolute; inset: 0; z-index: 0; }
+  .footer-bg img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.04; }
+  .footer-inner { position: relative; z-index: 2; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin: 14px 0 20px; }
+  .footer-brand .tagline { color: var(--gold); font-style: italic; font-size: 0.85rem; }
+  .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-size: 0.88rem; 
+    transition: all 0.3s;
+    position: relative;
+  }
+  .footer-col a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .footer-col a:hover::after { width: 100%; }
+  .footer-col a:hover { color: var(--gold); }
+  .contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; }
+  .contact-icon { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .contact-item span { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { color: var(--text-muted); font-size: 0.82rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 360px; }
+    .hero-left { padding: 60px 5%; }
+    .hero-left::after { display: none; }
+  }
+  @media (max-width: 900px) {
+    .features { grid-template-columns: 1fr 1fr; }
+    .about-grid, .mission-grid, .why-grid, .services-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-images { height: 340px; }
+    .projects-grid, .test-grid { grid-template-columns: repeat(2,1fr); }
+    .clients-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .mv-cards { grid-template-columns: 1fr; }
+    .why-images { grid-template-columns: 1fr; grid-template-rows: 220px 160px 160px; }
+    .why-img-a { grid-column: 1; }
+    .mission-img-bottom { grid-template-columns: 1fr; height: auto; }
+  }
+  @media (max-width: 600px) {
+    .features { grid-template-columns: 1fr; }
+    .projects-grid, .test-grid { grid-template-columns: 1fr; }
+    .clients-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home"><div class="logo-icon"><img src= "fumati.png"></div></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#clients">Clients</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Turning Steel Into Gold</div>
+      <h1>Engineering <em>Excellence</em></h1>
+      <p class="hero-sub">From structural design to steel fabrication, we deliver cutting-edge engineering solutions across Zimbabwe and Africa with expertise and innovation.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Start Your Project</a>
+        <a class="btn-secondary" href="tel:+263771960330"><span class="call-icon"></span>Call Us Today</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">15+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">300+</div>
+          <div class="hero-stat-label">Projects Completed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=85" alt="Modern construction site">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-right-badge">
+      <div class="big">30</div>
+      <div class="small">PROFESSIONAL ENGINEERS</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<section class="features">
+  <div class="feature-card">
+    <img class="feature-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80" alt="Structural Engineering">
+    <div class="feature-body">
+      <h3>Structural Engineering</h3>
+      <p>Advanced design and construction of load-bearing structures for residential and commercial projects.</p>
+    </div>
+  </div>
+  <div class="feature-card">
+    <img class="feature-img" src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&q=80" alt="Mechanical Engineering">
+    <div class="feature-body">
+      <h3>Mechanical Engineering</h3>
+      <p>Precision mechanical systems design and implementation for industrial applications.</p>
+    </div>
+  </div>
+  <div class="feature-card">
+    <img class="feature-img" src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=400&q=80" alt="Steel Fabrication">
+    <div class="feature-body">
+      <h3>Steel Fabrication</h3>
+      <p>Custom metal work and fabrication using state-of-the-art equipment and skilled artisans.</p>
+    </div>
+  </div>
+  <div class="feature-card">
+    <img class="feature-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80" alt="General Engineering">
+    <div class="feature-body">
+      <h3>General Engineering</h3>
+      <p>Comprehensive engineering consulting and project management for all your infrastructure needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-images">
+      <div class="about-img-main">
+        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=85" alt="Fumati team at construction site">
+      </div>
+      <div class="about-img-accent">
+        <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=400&q=80" alt="Steel welding process">
+      </div>
+      <div class="about-badge">
+        <div>98%</div>
+        <small>Client Satisfaction</small>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">About Fumati</div>
+      <h2 class="section-title">A New Generation<br><em>Engineering Company</em></h2>
+      <p>Founded on principles of excellence and innovation, Fumati Engineers is a full-service engineering firm delivering mechanical, structural, steel fabrication, and general engineering services across Zimbabwe and Africa. We combine technical expertise with a commitment to quality that sets us apart.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div>
+            <h4>Innovation-Driven</h4>
+            <p>We leverage cutting-edge technologies and modern methodologies to deliver forward-thinking solutions.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div>
+            <h4>Results-Oriented</h4>
+            <p>Every project is executed with precision, on-time delivery, and within budget constraints.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div>
+            <h4>Client-Centric</h4>
+            <p>Your success is our success. We build long-term partnerships based on trust and reliability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-label">Core Competencies</div>
+    <h2 class="section-title">Our <em>Services</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <img class="service-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&q=80" alt="Structural Engineering">
+      <div class="service-body">
+        <div class="service-num">01</div>
+        <h3>Structural Engineering</h3>
+        <p>Comprehensive structural design and analysis for buildings, bridges, and industrial facilities ensuring safety and durability.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img class="service-img" src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&q=80" alt="Mechanical Engineering">
+      <div class="service-body">
+        <div class="service-num">02</div>
+        <h3>Mechanical Engineering</h3>
+        <p>Design and optimization of mechanical systems for manufacturing, HVAC, and industrial applications.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img class="service-img" src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=500&q=80" alt="Steel Fabrication">
+      <div class="service-body">
+        <div class="service-num">03</div>
+        <h3>Steel Fabrication</h3>
+        <p>Custom metal fabrication and welding services with precision tolerances and superior craftsmanship.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img class="service-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80" alt="Project Management">
+      <div class="service-body">
+        <div class="service-num">04</div>
+        <h3>Project Management</h3>
+        <p>End-to-end project oversight ensuring timeline adherence, quality control, and stakeholder communication.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="projects-header">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80" alt="Shopping Mall Construction">
+      <div class="project-overlay">
+        <div class="project-cat">Commercial</div>
+        <div class="project-name">Modern Shopping Complex</div>
+        <div class="project-loc">Harare, Zimbabwe</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=80" alt="Industrial Facility">
+      <div class="project-overlay">
+        <div class="project-cat">Industrial</div>
+        <div class="project-name">Steel Processing Plant</div>
+        <div class="project-loc">Bulawayo, Zimbabwe</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1581094651181-35942459ef62?w=500&q=80" alt="Hospital Building">
+      <div class="project-overlay">
+        <div class="project-cat">Healthcare</div>
+        <div class="project-name">Hospital Expansion Wing</div>
+        <div class="project-loc">Harare, Zimbabwe</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1487958449943-2f414651b761?w=500&q=80" alt="Office Building">
+      <div class="project-overlay">
+        <div class="project-cat">Corporate</div>
+        <div class="project-name">Executive Office Tower</div>
+        <div class="project-loc">Johannesburg, South Africa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION & VALUES -->
+<section class="mission">
+  <div class="mission-grid">
+    <div>
+      <div class="section-label">Our Purpose</div>
+      <h2 class="section-title">Mission & <em>Values</em></h2>
+      <p>At Fumati Engineers, we are not in business to make numbers — we are there to create an intergenerational brand that will effectively contribute to the growth of the economy. Our brand culture is premised on excellence, productivity, customer satisfaction, and dynamic innovation.</p>
+      <div class="mv-cards">
+        <div class="mv-card">
+          <h4>Our Mission</h4>
+          <p>To deliver world-class engineering solutions that drive economic development and improve infrastructure quality across Africa.</p>
+        </div>
+        <div class="mv-card">
+          <h4>Our Vision</h4>
+          <p>To be the most trusted and innovative engineering partner for infrastructure development in Southern Africa.</p>
+        </div>
+      </div>
+      <div class="values-list">
+        <div class="val-tag">Excellence</div>
+        <div class="val-tag">Innovation</div>
+        <div class="val-tag">Integrity</div>
+        <div class="val-tag">Teamwork</div>
+        <div class="val-tag">Reliability</div>
+      </div>
+    </div>
+    <div class="mission-images">
+      <div class="mission-img-top">
+        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=85" alt="Team collaboration">
+      </div>
+      <div class="mission-img-bottom">
+        <div style="border-radius: 8px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=300&q=80" alt="Steel work">
+        </div>
+        <div style="border-radius: 8px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=80" alt="Engineering blueprint">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-header">
+    <div class="section-label">Client Feedback</div>
+    <h2 class="section-title">What Our Clients <em>Say</em></h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-quote">"Fumati delivered our project on time and exceeded our quality expectations. Their team is professional, responsive, and genuinely invested in success."</div>
+      <div class="test-author">
+        <img class="test-author-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Client">
+        <div>
+          <div class="test-author-name">James Mwangi</div>
+          <div class="test-author-role">Managing Director, Yadah Hotel</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-quote">"Their structural expertise was invaluable. The attention to detail and commitment to safety standards set them apart from other firms."</div>
+      <div class="test-author">
+        <img class="test-author-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Client">
+        <div>
+          <div class="test-author-name">Sarah Musimbi</div>
+          <div class="test-author-role">Project Manager, Pro Brands</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-quote">"Working with Fumati was a game-changer for our facility. Their innovative solutions improved efficiency and reduced costs significantly."</div>
+      <div class="test-author">
+        <img class="test-author-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Client">
+        <div>
+          <div class="test-author-name">Robert Chieza</div>
+          <div class="test-author-role">Operations Lead, Quality Gas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="clients-header">
+    <div class="section-label">Trusted By</div>
+    <h2 class="section-title">Our <em>Clients</em></h2>
+    <p style="color:var(--text-body);max-width:520px;margin:0 auto;line-height:1.7;">We serve clients ranging from individual homeowners to major industry players in both the private and public sector.</p>
+  </div>
+  <div class="clients-banner">
+    <img src="https://images.unsplash.com/photo-1485627941502-d2e6429a8af0?w=1200&q=80" alt="Construction team at work">
+    <div class="clients-banner-text">We've Built for <em>Zimbabwe's Best</em></div>
+  </div>
+  <div class="clients-grid">
+    <div class="client-cell"><div class="client-logo-text">Yadah Hotel</div></div>
+    <div class="client-cell"><div class="client-logo-text">MWOS FC</div></div>
+    <div class="client-cell"><div class="client-logo-text">Royal Junior School</div></div>
+    <div class="client-cell"><div class="client-logo-text">Pro Brands</div></div>
+    <div class="client-cell"><div class="client-logo-text">Quality Gas</div></div>
+    <div class="client-cell"><div class="client-logo-text">Dandemutande</div></div>
+    <div class="client-cell"><div class="client-logo-text">PHD Ministries</div></div>
+    <div class="client-cell"><div class="client-logo-text">Interpath</div></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-grid">
+    <div class="why-images">
+      <div class="why-img-a">
+        <img src="https://images.unsplash.com/photo-1581094651181-35942459ef62?w=900&q=85" alt="Fumati Engineers team on site">
+      </div>
+      <div class="why-img-b">
+        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=80" alt="Steel welding fabrication">
+      </div>
+      <div class="why-img-c">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80" alt="Building under construction">
+      </div>
+    </div>
+    <div class="why-text">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Reliable Service With<br><em>Lasting Results</em></h2>
+      <p>At Fumati Engineers, we are not in business to make numbers — we are there to create an intergenerational brand that will effectively contribute to the growth of the economy. Our brand culture is premised on excellence, productivity, customer satisfaction, and dynamic innovation so that at all times we remain ahead of the pack.</p>
+      <div class="why-points">
+        <div class="why-point"><div class="why-check"></div><p><strong style="color:var(--white)">No job too small</strong> — every project is treated with equal care and professionalism.</p></div>
+        <div class="why-point"><div class="why-check"></div><p><strong style="color:var(--white)">On-time delivery</strong> — outstanding project management ensuring completion within budget.</p></div>
+        <div class="why-point"><div class="why-check"></div><p><strong style="color:var(--white)">Quality workmanship</strong> — recommended by clients including stadiums, schools, and hospitals.</p></div>
+        <div class="why-point"><div class="why-check"></div><p><strong style="color:var(--white)">Experienced team</strong> — highly motivated engineers always on call to give you the best service.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="team-header">
+    <div class="section-label">Our Team</div>
+    <h2 class="section-title">Experienced Engineers,<br><em>Always On Call</em></h2>
+  </div>
+  <div class="team-img-wide">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=85" alt="Fumati engineering team">
+    <div class="team-img-wide-overlay">
+      <h3>A Team Built on Excellence</h3>
+      <p>Fumati Engineers boasts an experienced and highly motivated team of engineers that are always on call to give you the best services. Don't hesitate to knock on our doors — you will always leave a happy, satisfied client.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-banner-bg">
+    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1400&q=80" alt="Construction site background">
+  </div>
+  <div class="cta-content">
+    <h2>Ready to Start Your Project?<span>Get in touch with our team today for a free consultation. No job too big or too small.</span></h2>
+  </div>
+  <div class="cta-actions">
+    <a class="btn-gold" href="#contact">Contact Us Now</a>
+    <a class="btn-outline" href="tel:+263771960330">Call Now</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-bg">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=40" alt="">
+  </div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white);">
+          <div class="logo-icon"><img src="fumati.png"></div><span style="color:var(--gold)">&nbsp;ENGINEERS</span>       </div>
+        <p>A new generation engineering company delivering mechanical, structural, steel fabrication, and general engineering services across Zimbabwe and Africa.</p>
+        <div class="tagline">— Turning Steel Into Gold</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Structural Engineering</a></li>
+          <li><a href="#services">Mechanical Engineering</a></li>
+          <li><a href="#services">Steel Fabrication</a></li>
+          <li><a href="#services">General Engineering</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#clients">Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="contact-item"><span class="contact-item">+263 77 196 0330<br>+263 71 996 0330</span></div>
+        <div class="contact-item"><span class="contact-item">mechanicalengineering18@gmail.com</span></div>
+        <div class="contact-item"><span class="contact-item">Fumati Engineers (Facebook)</span></div>
+        <div class="contact-item"><span class="contact-item">Fumati Engineers (TikTok)</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Fumati Engineers PVT LTD. All rights reserved.</p>
+      <p style="color:var(--gold);font-size:0.82rem;">Turning Steel Into Gold.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id], footer[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  sections.forEach(s => {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.style.color = '');
+          const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (active) active.style.color = 'var(--gold)';
+        }
+      });
+    }, { threshold: 0.3 }).observe(s);
+  });
+
+  const fadeEls = document.querySelectorAll('.service-card, .project-card, .feature-card, .pillar, .mv-card, .test-card, .why-img-a, .why-img-b, .why-img-c');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    fadeObs.observe(el);
+  });
+</script>
+
+</body>
+</html>
